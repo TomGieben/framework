@@ -8,6 +8,7 @@ if(array_key_exists($path, $_SESSION['routes'])) {
     $name = $_SESSION['routes'][$path]['name'];
     $function = $_SESSION['routes'][$path]['function'];
     $middlewares = $_SESSION['routes'][$path]['middleware'];
+    $controller = 'controllers/'. $file .'.php';
 
     foreach($middlewares as $middleware => $value) {
         if($value !== $_SESSION['middleware'][$middleware]) {
@@ -21,8 +22,8 @@ if(array_key_exists($path, $_SESSION['routes'])) {
         die;
     }
 
-    if(file_exists('controllers/'. $file .'.php')) {
-        require('controllers/'. $file .'.php');
+    if(file_exists($controller)) {
+        require($controller);
         $file::$function();
     } else {
         echo 'Controller '. $file .'.php does not exists.';

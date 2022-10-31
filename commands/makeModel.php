@@ -6,11 +6,19 @@ $dir = '..\models\\';
 $path = $dir . $fileName;
 $tablename = $class . 's';
 $content = 
-'
-<?php
-    class '. $class .'
+'<?php
+    namespace App\Model;
+
+    use App\Model;
+    include("models/Model.php");
+
+    class '. $class .' extends Model
     {
-        private string $tablename = "'. $tablename .'";
+        public function table() {
+            return [
+                "tablename" => "'. $tablename .'",
+            ];
+        }
     }
 ';
 

@@ -16,9 +16,13 @@ class Database {
         $dsn = 'mysql:host='. $this->host .';dbname='. $this->database .';charset='.$this->charset .';port='. $this->port .'';
 
         try {
-            $pdo = new \PDO($dsn, $this->username, $this->password, $this->options);
+            $_SESSION['pdo'] = new \PDO($dsn, $this->username, $this->password, $this->options);
         } catch (\PDOException $e) {
             throw new \PDOException($e->getMessage(), (int)$e->getCode());
         }
+    }
+
+    static function query() {
+        return $_SESSION['pdo'];
     }
 }

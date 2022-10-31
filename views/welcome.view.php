@@ -1,5 +1,5 @@
 <?php
-    include('layouts/app.php');
+    include('layouts/app.view.php');
 ?>
 
 <div class="bg-primary" style="height: 100vh;">

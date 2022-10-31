@@ -1,6 +1,14 @@
-
 <?php
-    class Product
-    {
-        private string $tablename = "products";
+namespace App\Model;
+
+use App\Model;
+include('models/Model.php');
+
+class Product extends Model
+{
+    public function table() {
+        return [
+            'tablename' => 'blocks',
+        ];
     }
+}

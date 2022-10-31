@@ -20,15 +20,16 @@ if (!function_exists('config')) {
 }
 
 if (!function_exists('view')) {
-    function view(string $path, array $parameters) {
+    function view(string $path, array $parameters = []) {
+        $view = 'views/' . $path . '.view.php';
         if(!empty($parameters)) {
             foreach($parameters as $name => $value) {
                 $$name = $value;
             }
         }
 
-        if(file_exists('views/' . $path . '.php')) {
-            require('views/' . $path . '.php');
+        if(file_exists($view)) {
+            require($view);
         } else {
             echo 'View '. $path .'.php does not exists.';
             die;
