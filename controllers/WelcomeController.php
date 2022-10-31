@@ -4,7 +4,6 @@ use App\Model\Product;
 include('models/Product.php');
 class WelcomeController {
     public static function index() {
-        return view('welcome');
     }
 
     public static function create() {

@@ -5,7 +5,7 @@ use Database;
 use PDO;
 
 abstract class Model {
-    public string $select = "SELECT * FROM ";
+    public string $select = 'SELECT * FROM ';
     public string $where = '';
     public string $limit = '';
 
@@ -17,12 +17,25 @@ abstract class Model {
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function one() {
+    public function create(array $items) {
+        $fields = '';
+        $values = '';
         $tablename = $this->table()['tablename'];
-        $query = Database::query()->prepare("select * from ". $tablename ." limit 1;");
-        $query->execute();
-        
-        return $query->fetch(PDO::FETCH_ASSOC);
+
+        foreach($items as $field => $value) {
+            $fields .= $field;
+            $values .= "'" . $value . "'";
+
+            if(array_key_last($items) !== $field) {
+                $fields .= ', ';
+                $values .= ', ';
+            }
+        }
+
+        $query = "INSERT INTO " . $tablename . " (" . $fields . ") VALUES (" . $values . ");";
+        $prepare = Database::query()->prepare($query);
+
+        return $prepare->execute();
     }
 
     public function select(array $fields) {
