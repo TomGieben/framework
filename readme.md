@@ -1,0 +1,6 @@
+-How to create a Model?
+    -Go to /commands `cd commands`.
+    -Run `php makeModel.php {Name}`.
+-How to create a Controller?
+    -Go to /commands `cd commands`.
+    -Run `php makeModel.php {ModelName}Controller`.
