@@ -34,8 +34,9 @@ abstract class Model {
 
         $query = "INSERT INTO " . $tablename . " (" . $fields . ") VALUES (" . $values . ");";
         $prepare = Database::query()->prepare($query);
+        $prepare->execute();
 
-        return $prepare->execute();
+        return $this;
     }
 
     public function select(array $fields) {
@@ -49,14 +50,20 @@ abstract class Model {
         }
 
         $this->select .= " FROM";
+
+        return $this;
     }
 
     public function where(string $column, string $operator, string $value) {
         $this->where = "WHERE " . $column . ' '. $operator. ' ' . $value;
+
+        return $this;
     }
 
     public function limit(int $limit) {
         $this->limit = "LIMIT " . $limit;
+
+        return $this;
     }
 
     public function get() {
