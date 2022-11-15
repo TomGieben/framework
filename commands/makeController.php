@@ -2,7 +2,7 @@
 
 $class = $argv[1];
 $fileName = $class . '.php';
-$dir = '..\models\\';
+$dir = '..\controllers\\';
 $path = $dir . $fileName;
 $tablename = $class . 's';
 $content = 
