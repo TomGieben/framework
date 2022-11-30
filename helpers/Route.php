@@ -40,7 +40,7 @@ class Route {
         $path = parse_url($_SERVER['REQUEST_URI'])['path'];
 
         if(array_key_exists($path, $_SESSION['routes'])) {
-            return  $_SESSION['routes'][$path]['name'];
+            return $_SESSION['routes'][$path]['name'];
         } else {
             return 'Route doesn`t exists';
         }
