@@ -1,5 +1,4 @@
 <?php
-require('helpers/Language.php');
 
 function __(string $translatable): string {
     $base = 'configs/lang/';
