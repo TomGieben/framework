@@ -11,7 +11,6 @@ function view(string $path, array $parameters = []) {
     if(file_exists($view)) {
         require($view);
     } else {
-        echo 'View '. $path .'.php does not exists.';
-        die;
+        abort(Response::NOT_FOUND, 'View '. $path .'.php does not exists.');
     }
 }
