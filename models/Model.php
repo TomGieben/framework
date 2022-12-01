@@ -9,7 +9,7 @@ abstract class Model {
     public string $where = '';
     public string $limit = '';
 
-    public function all() {
+    public function all(): array {
         $tablename = $this->table()['tablename'];
         $query = Database::query()->prepare("select * from ". $tablename .";");
         $query->execute();
@@ -17,7 +17,7 @@ abstract class Model {
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function create(array $items) {
+    public function create(array $items): Model {
         $fields = '';
         $values = '';
         $tablename = $this->table()['tablename'];
@@ -39,7 +39,7 @@ abstract class Model {
         return $this;
     }
 
-    public function select(array $fields) {
+    public function select(array $fields): Model {
         $this->select = "SELECT ";
 
         foreach($fields as $field) {
@@ -54,19 +54,19 @@ abstract class Model {
         return $this;
     }
 
-    public function where(string $column, string $operator, string $value) {
+    public function where(string $column, string $operator, string $value): Model {
         $this->where = "WHERE " . $column . ' '. $operator. ' ' . $value;
 
         return $this;
     }
 
-    public function limit(int $limit) {
+    public function limit(int $limit): Model {
         $this->limit = "LIMIT " . $limit;
 
         return $this;
     }
 
-    public function get() {
+    public function get(): array {
         $tablename = $this->table()['tablename'];
         $query = $this->select ." ". $tablename ." ". $this->where ." ". $this->limit .";";
         $prepare = Database::query()->prepare($query);
@@ -75,7 +75,7 @@ abstract class Model {
         return $prepare->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function first() {
+    public function first(): array {
         $tablename = $this->table()['tablename'];
         $query = $this->select ." ". $tablename ." ". $this->where ." ". $this->limit .";";
         $prepare = Database::query()->prepare($query);
@@ -84,7 +84,7 @@ abstract class Model {
         return $prepare->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function toSql() {
+    public function toSql(): string {
         $tablename = $this->table()['tablename'];
         $query = $this->select ." ". $tablename ." ". $this->where ." ". $this->limit .";";
 
