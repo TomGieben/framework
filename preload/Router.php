@@ -12,24 +12,20 @@ if(array_key_exists($path, $_SESSION['routes'])) {
 
     foreach($middlewares as $middleware => $value) {
         if($value !== $_SESSION['middleware'][$middleware]) {
-            echo 'Middleware `'. $middleware .'` has an incorrect value';
-            die;
+            abort(Response::FORBIDDEN, 'Middleware `'. $middleware .'` has an incorrect value');
         }
     }
 
     if($_SERVER['REQUEST_METHOD'] !==  $method) {
-        echo 'Method '. $_SERVER['REQUEST_METHOD'] .' not allowed for route name `'. $name .'` (Has to be '. $method .')';
-        die;
+        abort(Response::FORBIDDEN, 'Method '. $_SERVER['REQUEST_METHOD'] .' not allowed for route name `'. $name .'` (Has to be '. $method .')');
     }
 
     if(file_exists($controller)) {
         require($controller);
         $file::$function();
     } else {
-        echo 'Controller '. $file .'.php does not exists.';
-        die;
+        abort(Response::NOT_FOUND, 'Controller '. $file .'.php does not exists.');
     }
 } else {
-    header("HTTP/1.0 404 Not Found");
-    echo 'Not found';
+    abort(Response::NOT_FOUND);
 }

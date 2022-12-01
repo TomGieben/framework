@@ -1,7 +1,5 @@
 <?php
 
-require('helpers/Database.php');
-
 $config = config('database');
 $database = new Database;
 
