@@ -1,6 +1,7 @@
 <?php
 
 function __(string $translatable): string {
+
     $base = 'configs/lang/';
     $pieces = explode('.', $translatable);
     $dir = $base . Language::getLocale() . '/';
